@@ -30,32 +30,40 @@ if($_POST){
     $product->price = $_POST['price'];
     $product->description = $_POST['description'];
     $product->category_id = $_POST['category_id'];
+    // $image=!empty($_FILES["image"]["name"])
+    //         ? sha1_file($_FILES['image']['tmp_name']) . "-" . basename($_FILES["image"]["name"]) : "";
     $image=!empty($_FILES["image"]["name"])
-            ? sha1_file($_FILES['image']['tmp_name']) . "-" . basename($_FILES["image"]["name"]) : "";
+            ? basename($_FILES["image"]["name"]) : "";
     $product->image = $image;
+   
     // create the product
     if($product->create()){
         echo "<div class='alert alert-success'>Product was created.</div>";
+            //
     }
-     // try to upload the submitted file
+         // try to upload the submitted file
+
     // uploadPhoto() method will return an error message, if any.
-    echo $product->uploadPhoto();
+
     // if unable to create the product, tell the user
 
     else{
         echo "<div class='alert alert-danger'>Unable to create product.</div>";
     }
-
+  echo $product->uploadPhoto();
     // if $file_upload_error_messages is still empty
+  $oldpath = $_FILES['image']['tmp_name'];
+  $newpath ="uploads/".$_FILES['image']['name'];
     if(empty($file_upload_error_messages)){
         // it means there are no errors, so try to upload the file
-        if(move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)){
+        if(move_uploaded_file($oldpath, $newpath)){
             // it means photo was uploaded
+           
         }else{
-            $result_message.="<div class='alert alert-danger'>";
+                 $result_message.="<div class='alert alert-danger'>";
                 $result_message.="<div>Unable to upload photo.</div>";
                 $result_message.="<div>Update the record to upload photo.</div>";
-            $result_message.="</div>";
+                $result_message.="</div>";
         }
     }
      
@@ -102,7 +110,7 @@ if($_POST){
 				 
 				    while ($row_category = $stmt->fetch(PDO::FETCH_ASSOC)){
 				        extract($row_category);
-				        echo "<option value='{$id}'>{$name}</option>";
+				        echo "<option value='{$id}'>{$cat_child_name}</option>";
 				    }
 				 
 				echo "</select>";

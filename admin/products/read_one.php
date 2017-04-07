@@ -55,7 +55,7 @@ echo "<table class='table table-hover table-responsive table-bordered'>";
             // display category name
             $category->id=$product->category_id;
             $category->readName();
-            echo $category->name;
+            echo $category->pname;
         echo "</td>";
     echo "</tr>";
 	 echo "<tr>";

@@ -23,7 +23,13 @@ if(isset($_POST['btn-login']))
   
  if($user->login($umail,$upass))
  {
-  $user->redirect('admin/products/index.php');
+  if (isset($_SESSION['user_session'])) {
+  #redirect unauthorized user
+  $user->redirect('test.php');
+   
+  }
+  echo "UUUUUUhuu..Error!";  
+  
  }
  else
  {
@@ -103,7 +109,7 @@ if(isset($_POST['btn-login']))
    <div class="col-lg-2">
       <ul class="nav navbar-nav navbar-right">
         <li><a href="auth/sign-up.php">Sign up</a></li>
-        <li ><a href="#" class="glyphicon glyphicon-log-in"><span data-toggle="modal" data-target="#myModal">&nbsp;Login</span> </a></li>
+        <li ><a href="auth/login.php" class="glyphicon glyphicon-log-in"><span data-toggle="modal" data-target="#myModal">&nbsp;Login</span> </a></li>
       </ul>
 	</div>
 	</div>
@@ -167,7 +173,7 @@ if(isset($_POST['btn-login']))
                 </button>
             </div>
             <br />
-            <label>Don't have account yet ! <a href="sign-up.php">Sign Up</a></label>
+            <label>Don't have account yet ! <a href="auth/sign-up.php">Sign Up</a></label>
         </form>
       </div>
       <div class="modal-footer">

@@ -67,7 +67,7 @@ echo "</div>";
 						            echo "<option value='$id'>";
 						        }
 						 
-						        echo "$name</option>";
+						        echo "{$cat_child_name}</option>";
 						    }
 						echo "</select>";
 						?>

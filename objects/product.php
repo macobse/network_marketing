@@ -13,6 +13,7 @@ class Product{
     public $image;
     public $category_id;
     public $timestamp;
+
  
     public function __construct($db){
         $this->conn = $db;
@@ -25,7 +26,7 @@ class Product{
         // insert query
         $query = "INSERT INTO " . $this->table_name . "
                     SET name=:name, price=:price, description=:description,
-                        category_id=:category_id, image=:image, created=:created";
+                        category_id=:category_id, image=:image, created_at=:created, updated_at=:updated";
  
         $stmt = $this->conn->prepare($query);
  
@@ -44,6 +45,7 @@ class Product{
         $stmt->bindParam(":description", $this->description);
         $stmt->bindParam(":category_id", $this->category_id);
         $stmt->bindParam(":created", $this->timestamp);
+        $stmt->bindParam(":updated", $this->timestamp);
         $stmt->bindParam(":image", $this->image);
         if($stmt->execute()){
             return true;
@@ -230,7 +232,7 @@ class Product{
             $target_directory = "uploads/";
             $target_file = $target_directory . $this->image;
             $file_type = pathinfo($target_file, PATHINFO_EXTENSION);
-     
+          
             // error message is empty
             $file_upload_error_messages="";
             // make sure that file is a real image

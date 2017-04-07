@@ -40,7 +40,7 @@ if($total_rows>0){
                 echo "<td>";
                     $category->id = $category_id;
                     $category->readName();
-                    echo $category->name;
+                    echo $category->pname;
                 echo "</td>";
  
                 echo "<td>";
