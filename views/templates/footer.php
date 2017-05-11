@@ -3,21 +3,34 @@
    </div>
     <!-- /wrapper -->
 <!-- jQuery library -->
-<script src="../../libs/js/jquery.js"></script>
+
  
 <!-- bootstrap JavaScript -->
-<script src="../../libs/css/bootstrap/dist/js/bootstrap.min.js"></script>
+
 <script src="../../libs/css/bootstrap/docs-assets/js/holder.js"></script>
 
 
-    <!-- Metis Menu Plugin JavaScript -->
-<script src="../../libs/metisMenu/metisMenu.min.js"></script>
-
-    <!-- Custom Theme JavaScript -->
-<script src="../../libs/dist/js/sb-admin-2.js"></script>
+>
 <!-- bootbox library -->
 <script src="../../libs/js/bootbox.min.js"></script>
- 
+
+
+
+ <script src="../../libs/js/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../libs/js/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="../../libs/js/metisMenu/metisMenu.min.js"></script>
+
+    <!-- Morris Charts JavaScript -->
+    <script src="../../libs/js/raphael/raphael.min.js"></script>
+    <script src="../../libs/js/morrisjs/morris.min.js"></script>
+    <script src="../../libs/js/data/morris-data.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="../../libs/js/sb-admin/sb-admin-2.js"></script>
 <!-- HTML5 Shiv and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>

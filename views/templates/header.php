@@ -1,3 +1,7 @@
+<?php 
+    require '../../config/core.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,13 +33,21 @@
         text-align: center !important;
     }
     </style>
- 
-    <!-- Bootstrap CSS -->
-    <link href="../../libs/css/bootstrap/dist/css/bootstrap.css" rel="stylesheet" media="screen" />
-  <!-- MetisMenu CSS -->
+     <!-- Bootstrap Core CSS -->
+    <link href="../../libs/css/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
     <link href="../../libs/css/metisMenu/metisMenu.min.css" rel="stylesheet">
-      <!-- Admin template:: Navigation bar CSS -->
+
+    <!-- Custom CSS -->
     <link href="../../libs/css/dist/css/sb-admin-2.css" rel="stylesheet">
+
+    
+    <!-- Custom Fonts -->
+   
+    <!-- Bootstrap CSS -->
+   
+
         <!-- Custom Fonts and icons -->
     <link href="../../views/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 </head>
@@ -50,7 +62,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.php"><h4>MLM AdminDashboard</h4></a>
+                <a class="navbar-brand" href="../../dashboard.php"><h4>MLM AdminDashboard</h4></a>
             </div>
             <!-- /.navbar-header -->
 
@@ -263,15 +275,32 @@
                 <!-- /.dropdown -->
             </ul>
             <!-- /.navbar-top-links -->
-            
+            <?php require '../../views/templates/sidebar.php';?>
+            <!-- /.navbar-static-side -->
 
         </nav> 
     <!-- container -->
-    <div class="container">
+            <div id="page-wrapper">
+
+            <!-- /.row -->
+        
  
         <?php
         // show page header
         echo "<div class='page-header'>";
             echo "<h1>{$page_title}</h1>";
+             ?>
+
+<!--     <ul class="breadcrumb">
+
+        <li><a href="#">Home</a></li>
+
+        <li><a href="#">Products</a></li><?php
+
+       // echo "<li class='active'>{$page_title}</li>";?>
+
+    </ul> -->
+
+<?php
         echo "</div>";
         ?>

@@ -1,20 +1,36 @@
 
 <?php
-  if (isset($_SESSION['user_session'])) {
+ session_start();
 
-  	# code...
-  	$user->redirect('admin/products/index.php');
-  }
 
   // Connect to database
   require_once('config/database.php');
   $database = new Database();
   $db = $database->getConnection();
+include_once 'objects/product.php';
+include_once 'objects/category.php';
+// core.php holds pagination variables
+include_once 'config/core.php';
+//initalization
+$product = new Product($db);
+$category = new Category($db);
 
+// query products
+$stmt = $product->readAll($from_record_num, $records_per_page);
+ 
+// specify the page where paging is used
+$page_url = "index.php?";
+ 
+// count total rows - used for pagination
+$total_rows=$product->countAll();
   //Load user class
   require_once('objects/user.php');
   $user = new USER($db);
+  // if (isset($_SESSION['user_session'])) {
 
+  //   # code...
+  //   $user->redirect('admin/products/index.php');
+  // }
 if(isset($_POST['btn-login']))
 {
 
@@ -109,7 +125,24 @@ if(isset($_POST['btn-login']))
    <div class="col-lg-2">
       <ul class="nav navbar-nav navbar-right">
         <li><a href="auth/sign-up.php">Sign up</a></li>
-        <li ><a href="auth/login.php" class="glyphicon glyphicon-log-in"><span data-toggle="modal" data-target="#myModal">&nbsp;Login</span> </a></li>
+        <?php
+
+          if (!isset($_SESSION['user_session'])) { 
+
+            # code...
+            ?>
+            <li ><a href="auth/login.php" class="glyphicon glyphicon-log-in"><span data-toggle="modal" data-target="#myModal">&nbsp;Login</span> </a></li>
+            <?php
+            }
+
+          else{
+          ?>
+          <li><a href="dashboard.php" class="glyphicon glyphicon-log-in"><span data-toggle="modal" data-target="#myModal">&nbsp;Dashboard</span> </a></li>
+            <li><a href="auth/logout.php" class="glyphicon glyphicon-log-in"><span data-toggle="modal" data-target="#myModal">&nbsp;Logout</span> </a></li>
+            <?php
+          }
+        ?>
+        
       </ul>
 	</div>
 	</div>
@@ -257,34 +290,40 @@ if(isset($_POST['btn-login']))
 <div class="container text-center">    
   <h3>Featured Items</h3><br>
   <div class="row">
+<?php
+// display the products if there are any
+
+if($total_rows>0){
+  ?>
  <div class="row text-center">
+
+ <?php
+ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+            extract($row);
+
+            $prodImg = 'admin/products/uploads/'.$row['image'];
+ ?>
   <div class="col-sm-4">
     <div class="thumbnail">
-      <img src="paris.jpg" alt="Paris">
-      <p><strong>Paris</strong></p>
-      <p>Fri. 27 November 2015</p>
+
+      <img src="<?php echo $prodImg; ?>" alt="Paris">
+      <p><strong><?php echo $row['name'];?></strong></p>
+      <p><?php echo $row['description'];?></p>
+      <a href="<?php echo $row['id']; ?>"><button class="btn">View</button></a>
       <button class="btn">Buy</button>
       <button class="btn">Add to Cart</button>
+
     </div>
   </div>
-  <div class="col-sm-4">
-    <div class="thumbnail">
-      <img src="newyork.jpg" alt="New York">
-      <p><strong>New York</strong></p>
-      <p>Sat. 28 November 2015</p>
-      <button class="btn">Buy</button>
-      <button class="btn">Add to Cart</button>
-    </div>
-  </div>
-  <div class="col-sm-4">
-    <div class="thumbnail">
-      <img src="sanfran.jpg" alt="San Francisco">
-      <p><strong>San Francisco</strong></p>
-      <p>Sun. 29 November 2015</p>
-      <button class="btn">Buy</button>
-      <button class="btn">Add to Cart</button>
-    </div>
-  </div>
+
+ <?php }
+   }
+   else {
+
+    echo "No Product found!";
+  }
+ ?>
+   
 </div>
   </div>
 </div><br>

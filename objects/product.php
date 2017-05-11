@@ -59,7 +59,7 @@ class Product{
     function readAll($from_record_num, $records_per_page){
  
     $query = "SELECT
-                id, name, description, price, category_id
+                id, name, description, image, price, category_id
             FROM
                 " . $this->table_name . "
             ORDER BY

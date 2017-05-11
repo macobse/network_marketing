@@ -30,9 +30,8 @@ if($total_rows>0){
         echo "</tr>";
  
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
- 
             extract($row);
- 
+
             echo "<tr>";
                 echo "<td>{$name}</td>";
                 echo "<td>{$price}</td>";

@@ -50,6 +50,7 @@ class USER{
              {
                 $_SESSION['user_session'] = $userRow['id'];
                 $_SESSION['user_name'] = $userRow['fname'];
+                $_SESSION['user_type'] = $userRow['user_type'];
                 return true;
              }
              else
@@ -82,6 +83,63 @@ class USER{
         session_destroy();
         unset($_SESSION['user_session']);
         return true;
+   }
+
+   // Check wheather user exists or not 
+
+   public function checkUser($value)
+   {
+     # code...
+    try
+       {
+          $stmt = $this->db->prepare("SELECT * FROM users WHERE id=:uid LIMIT 1");
+          $stmt->execute(array(':uid'=>$value));
+          $userRow=$stmt->fetch(PDO::FETCH_ASSOC);
+          if($stmt->rowCount() > 0)
+          {
+            return true;
+          }
+          else
+             {
+                return false;
+             }
+          
+       }
+       catch(PDOException $e)
+       {
+           echo $e->getMessage();
+       }
+   }
+
+   //Get user information
+   public function getUserInfo($id)
+   {
+     # code...
+      try {
+          $stmt = $this->db->prepare("SELECT * FROM users WHERE id=:uid LIMIT 0,1");
+         
+
+          if ($stmt->execute(array(':uid'=>$id))) {
+                
+            
+          $row = $stmt->fetch(PDO::FETCH_ASSOC);
+          // $this->id = $row['id'];
+          // $this->name = $row['fname'];
+          // $this->pic = $row['profile_pic'];
+
+         $json = json_encode($row);
+            
+            return json_decode($json);
+            
+        }else{
+            
+            return null;
+            
+        }
+        
+      } catch (Exception $e) {
+        
+      }
    }
 }
 ?>
